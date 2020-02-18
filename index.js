@@ -1,12 +1,8 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
 const teamMembers = []
-const manager = require("./lib/Manager")
-const engineer = require("./lib/Engineer")
-const intern = require("./lib/Intern")
-const employee = require("./lib/Employee")
 const render = require("./lib/htmlRenderer")
-
+const employee = require("./lib/Employee")
 
 async function userPrompt(){
   await inquirer.prompt([{
@@ -18,7 +14,7 @@ async function userPrompt(){
     name: "id"
   },
   {
-    message: "What is the manager's email address",
+    message: "What is the manager's email address?",
     name: "email"
   },
   {
@@ -31,21 +27,20 @@ async function userPrompt(){
     choices: ["Engineer", "Intern", "No one else"],
     name: "member"
   }
-  ]).then(function(employee){
+  ]).then(async function(employee){
     employee.role = "Manager"
     // const team = new Employee(employee)
     teamMembers.push(employee)
     // createManage()
     if(employee.member === "Engineer"){
-      promptEngineer()
+      await promptEngineer()
     }
     else if(employee.member === "Intern"){
-      promptIntern()
+      await promptIntern()
     }
     else{
       return teamMembers
     }
-    console.log(teamMembers)
   })
 }
 
@@ -60,7 +55,7 @@ async function promptEngineer(){
     name: "id"
   },
   {
-    message: "What is the engineer's email address",
+    message: "What is the engineer's email address?",
     name: "email"
   },
   {
@@ -84,7 +79,6 @@ async function promptEngineer(){
     else{
       return teamMembers
     }
-    console.log(teamMembers)
   })
 }
 
@@ -98,7 +92,7 @@ async function promptIntern(){
     name: "ID"
   },
   {
-    message: "What is the intern's email address",
+    message: "What is the intern's email address?",
     name: "email"
   },
   {
@@ -110,20 +104,25 @@ async function promptIntern(){
     message: "Any other members you would like to add?",
     choices: ["Engineer", "Intern", "No one else"],
     name: "member"
-  }]).then(function(employee){
+  }]).then(async function(employee){
     employee.role = "Intern"
     teamMembers.push(employee)
     if(employee.member === "Engineer"){
-      promptEngineer()
+      await promptEngineer()
     }
     else if(employee.member === "Intern"){
-      promptIntern()
+      await promptIntern()
     }
     else{
       return teamMembers
     }
-    console.log(teamMembers)
   })
 }
 
-userPrompt()
+async function teamMaker(){
+const manager = await userPrompt()
+
+console.log(teamMembers)
+}
+
+teamMaker()
