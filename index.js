@@ -2,7 +2,7 @@ const fs = require("fs");
 const inquirer = require("inquirer");
 const teamMembers = []
 const render = require("./lib/htmlRenderer")
-const employee = require("./lib/Employee")
+const Employee = require("./lib/Employee")
 
 async function userPrompt(){
   await inquirer.prompt([{
@@ -30,8 +30,9 @@ async function userPrompt(){
   ]).then(async function(employee){
     employee.role = "Manager"
     // const team = new Employee(employee)
+    // const role = employee.getRole()
+    // console.log(role)
     teamMembers.push(employee)
-    // createManage()
     if(employee.member === "Engineer"){
       await promptEngineer()
     }
@@ -89,7 +90,7 @@ async function promptIntern(){
   },
   {
     message: "What is the intern's ID?",
-    name: "ID"
+    name: "id"
   },
   {
     message: "What is the intern's email address?",
@@ -121,8 +122,8 @@ async function promptIntern(){
 
 async function teamMaker(){
 const manager = await userPrompt()
+// console.log(teamMembers)
 
-console.log(teamMembers)
 }
 
 teamMaker()
