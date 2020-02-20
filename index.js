@@ -31,7 +31,7 @@ async function userPrompt(){
     name: "member"
   }
   ]).then(async function(employee){
-    const manager = new Manager(employee.name, employee.id, employee.email, employee.officenumber)
+    const manager = new Manager(employee.name, employee.id, employee.email, employee.officeNumber)
     // employee.role = "Manager"
     // console.log(role)
     teamMembers.push(manager)
