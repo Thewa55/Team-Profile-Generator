@@ -2,7 +2,10 @@ const fs = require("fs");
 const inquirer = require("inquirer");
 const teamMembers = []
 const Render = require("./lib/htmlRenderer")
-const Employee = require("./lib/Employee")
+const Manager = require("./lib/Manager")
+const Engineer = require("./lib/Engineer")
+const Intern = require("./lib/Intern")
+
 
 async function userPrompt(){
   await inquirer.prompt([{
@@ -28,11 +31,10 @@ async function userPrompt(){
     name: "member"
   }
   ]).then(async function(employee){
-    employee.role = "Manager"
-    // const team = new Employee(employee)
-    // const role = employee.getRole()
+    const manager = new Manager(employee.name, employee.id, employee.email, employee.officenumber)
+    // employee.role = "Manager"
     // console.log(role)
-    teamMembers.push(employee)
+    teamMembers.push(manager)
     if(employee.member === "Engineer"){
       await promptEngineer()
     }
@@ -60,7 +62,7 @@ async function promptEngineer(){
     name: "email"
   },
   {
-    message: "What is your engineer's GitHub usernam?",
+    message: "What is your engineer's GitHub username?",
     name: "github"
   },
   {
@@ -69,8 +71,9 @@ async function promptEngineer(){
     choices: ["Engineer", "Intern", "No one else"],
     name: "member"
   }]).then(async function(employee){
-    employee.role = "Engineer"
-    teamMembers.push(employee)
+    const engineer = new Engineer(employee.name, employee.id, employee.email, employee.github)
+    // employee.role = "Engineer"
+    teamMembers.push(engineer)
     if(employee.member === "Engineer"){
       await promptEngineer()
     }
@@ -106,8 +109,9 @@ async function promptIntern(){
     choices: ["Engineer", "Intern", "No one else"],
     name: "member"
   }]).then(async function(employee){
-    employee.role = "Intern"
-    teamMembers.push(employee)
+    const intern = new Intern(employee.name, employee.id, employee.email, employee.school)
+    // employee.role = "Intern"
+    teamMembers.push(intern)
     if(employee.member === "Engineer"){
       await promptEngineer()
     }
@@ -125,7 +129,7 @@ async function teamMaker(){
     const manager = await userPrompt()
     // console.log(teamMembers)
     const finalTeam = await Render(teamMembers)
-    fs.writeFile("team.html", Render,function(err){
+    fs.writeFile("team.html", finalTeam,function(err){
 
     })
   }
