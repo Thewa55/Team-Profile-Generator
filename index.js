@@ -10,20 +10,44 @@ const Intern = require("./lib/Intern")
 async function userPrompt(){
   await inquirer.prompt([{
     message: "What is the manager's name?",
-    name: "name"
-  },
+    name: "name",
+    validate: function(value){
+      if (value !==""){
+        return true
+      }
+      return 'Please enter a valid name'  
+      
+    }},
   {
     message: "What is the manager's ID?",
-    name: "id"
-  },
+    name: "id",
+    validate: function(value){
+      if (parseInt(value) < 0){
+        return true
+      }
+      return 'Please enter a valid ID (Any number 1 or greater)'  
+  }},
   {
     message: "What is the manager's email address?",
-    name: "email"
-  },
+    name: "email",
+    validate: function(value){
+      var pass = value.match(
+        /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i
+      );
+      if (pass) {
+        return true;
+      }
+      return 'Please enter a valid email "username@example.com"'    
+  }},
   {
     message: "What's your office number?",
-    name: "officeNumber"
-  },
+    name: "officeNumber",
+    validate: function(value){
+      if (parseInt(value) > 0){
+        return true
+      }
+      return 'Please enter a number greater then 0'
+    }},
   {
     type: "list",
     message: "Any other members you would like to add?",
@@ -51,20 +75,43 @@ async function userPrompt(){
 async function promptEngineer(){
   await inquirer.prompt([{
     message: "What is the engineer's name?",
-    name: "name"
-  },
+    name: "name",
+    validate: function(value){
+      if (value !==""){
+        return true
+      }
+      return 'Please enter a valid name'  
+    }},
   {
     message: "What is the engineer's ID?",
-    name: "id"
-  },
+    name: "id",
+    validate: function(value){
+      if (parseInt(value) < 0){
+        return true
+      }
+      return 'Please enter a valid ID (Any number 1 or greater)'  
+    }},
   {
     message: "What is the engineer's email address?",
-    name: "email"
-  },
+    name: "email",
+    validate: function(value){
+      var pass = value.match(
+        /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i
+      );
+      if (pass) {
+        return true;
+      }
+      return 'Please enter a valid email "username@example.com"'    
+  }},
   {
     message: "What is your engineer's GitHub username?",
-    name: "github"
-  },
+    name: "github",
+    validate: function(value){
+      if (value !==""){
+        return true
+      }
+      return 'Please enter a valid GitHut username'  
+  }},
   {
     type: "list",
     message: "Any other members you would like to add?",
@@ -89,20 +136,43 @@ async function promptEngineer(){
 async function promptIntern(){
   await inquirer.prompt([{
     message: "What is the intern's name?",
-    name: "name"
-  },
+    name: "name",
+    validate: function(value){
+      if (value !==""){
+        return true
+      }
+      return 'Please enter a valid name'  
+  }},
   {
     message: "What is the intern's ID?",
-    name: "id"
-  },
+    name: "id",
+    validate: function(value){
+      if (parseInt(value) < 0){
+        return true
+      }
+      return 'Please enter a valid ID (Any number 1 or greater)'  
+  }},
   {
     message: "What is the intern's email address?",
-    name: "email"
-  },
+    name: "email",
+    validate: function(value){
+      var pass = value.match(
+        /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i
+      );
+      if (pass) {
+        return true;
+      }
+      return 'Please enter a valid email "username@example.com"'    
+  }},
   {
     message: "What school is the intern from?",
-    name: "school"
-  },
+    name: "school",
+    validate: function(value){
+      if (value !==""){
+        return true
+      }
+      return 'Please enter a school name'  
+  }},
   {
     type: "list",
     message: "Any other members you would like to add?",
