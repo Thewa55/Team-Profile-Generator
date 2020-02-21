@@ -22,7 +22,7 @@ async function userPrompt(){
     message: "What is the manager's ID?",
     name: "id",
     validate: function(value){
-      if (parseInt(value) < 0){
+      if (parseInt(value) > 0){
         return true
       }
       return 'Please enter a valid ID (Any number 1 or greater)'  
@@ -86,7 +86,7 @@ async function promptEngineer(){
     message: "What is the engineer's ID?",
     name: "id",
     validate: function(value){
-      if (parseInt(value) < 0){
+      if (parseInt(value) > 0){
         return true
       }
       return 'Please enter a valid ID (Any number 1 or greater)'  
@@ -147,7 +147,7 @@ async function promptIntern(){
     message: "What is the intern's ID?",
     name: "id",
     validate: function(value){
-      if (parseInt(value) < 0){
+      if (parseInt(value) > 0){
         return true
       }
       return 'Please enter a valid ID (Any number 1 or greater)'  
@@ -200,7 +200,6 @@ async function teamMaker(){
     // console.log(teamMembers)
     const finalTeam = await Render(teamMembers)
     fs.writeFile("team.html", finalTeam,function(err){
-
     })
   }
   catch(err){

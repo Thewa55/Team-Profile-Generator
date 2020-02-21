@@ -1,12 +1,12 @@
-<div class="card employeeCard">
-    <div class="card-header">
-      <h3>{{ name }}</h3>
-      <h4>{{ role }}</h4>
-    </div>
-    <div class="card-body">
-      <p>ID: {{ id }}</p>
-      <p>E-mail: {{ email }}</p>
-      <p>Github: {{ github }}</p>
-    </div>
-  </div> 
-  
+<div class="card employeeCard col-md-3 ml-4 mr-4 pl-0 pr-0 mt-5">
+  <div class="card-header pl-3" style="width: 100%; background-color: red; color: white;">
+    <h2>{{ name }}</h2>
+    <h3>{{ role }}</h3>
+  </div>
+  <ul class="list-group m-3 mb-4 mt-4">
+    <span class="border-top"></span>
+    <li class="list-group-item pl-3">ID: {{ id }}</li>
+    <li class="list-group-item pl-3">E-mail: {{ email }}</li>
+    <li class="list-group-item pl-3">Github: {{ github }}</li>
+  </ul>
+</div> 
