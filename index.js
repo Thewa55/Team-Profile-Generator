@@ -197,7 +197,6 @@ async function promptIntern(){
 async function teamMaker(){
   try{
     const manager = await userPrompt()
-    // console.log(teamMembers)
     const finalTeam = await Render(teamMembers)
     fs.writeFile("team.html", finalTeam,function(err){
     })
